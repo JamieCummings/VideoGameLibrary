@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0782556A213836A400884EA0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07825569213836A400884EA0 /* main.swift */; };
+		0782557121384A5700884EA0 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782557021384A5700884EA0 /* Menu.swift */; };
+		07EA505A213EBBE100EBD2F4 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EA5059213EBBE100EBD2F4 /* Game.swift */; };
+		07EA505C213EC06500EBD2F4 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EA505B213EC06500EBD2F4 /* Library.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,9 @@
 /* Begin PBXFileReference section */
 		07825566213836A400884EA0 /* Video Game Library */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Video Game Library"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07825569213836A400884EA0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		0782557021384A5700884EA0 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		07EA5059213EBBE100EBD2F4 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		07EA505B213EC06500EBD2F4 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				07825569213836A400884EA0 /* main.swift */,
+				0782557021384A5700884EA0 /* Menu.swift */,
+				07EA5059213EBBE100EBD2F4 /* Game.swift */,
+				07EA505B213EC06500EBD2F4 /* Library.swift */,
 			);
 			path = "Video Game Library";
 			sourceTree = "<group>";
@@ -119,6 +128,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0782557121384A5700884EA0 /* Menu.swift in Sources */,
+				07EA505C213EC06500EBD2F4 /* Library.swift in Sources */,
+				07EA505A213EBBE100EBD2F4 /* Game.swift in Sources */,
 				0782556A213836A400884EA0 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
