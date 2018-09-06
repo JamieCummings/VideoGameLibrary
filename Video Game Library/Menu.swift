@@ -58,6 +58,7 @@ class Menu {
             help()
         case "4":
             library.checkGameOut()
+            print("") 
             help()
         case "5":
             library.checkGameIn()

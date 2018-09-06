@@ -94,10 +94,21 @@ class Library {
         //TODO:- add func to check game out
         print("What game would you like to check out?")
         
+        var checkList = false
+        for game in gameArray {
+            if game.checkedIn == false {
+                checkList = true
+            }
+        }
+        if !checkList {
+            return print("There are no games available to check in.")
+        }
+       
         for (i, index) in gameArray.enumerated() {
-            
-            print("\(i + 1) \(index.title)")
-            
+            if index.checkedIn == true {
+                
+                print("\(i + 1) \(index.title)")
+            }
         }
         
         print("\n")
@@ -106,7 +117,7 @@ class Library {
         
         if let input = Int(readLine()!) {
             
-            if input > 0 && input < gameArray.count + 1 {
+            if input > 0 && input < gameArray.count {
                 
                 gameArray[input - 1].checkedIn = false
                 let currentCalendar = Calendar.current
@@ -128,6 +139,16 @@ class Library {
         //TODO:- add func to check game in
         print("What game would you like to check in?")
         
+        var checkList = false
+        for game in gameArray {
+            if game.checkedIn == false {
+                checkList = true
+            }
+        }
+        if !checkList {
+            return print("There are no games available to check in.")
+        }
+        
         for (i, index) in gameArray.enumerated() {
             if index.checkedIn == false{
                 
@@ -141,7 +162,7 @@ class Library {
         
         if let input = Int(readLine()!) {
             
-            if input > 0 && input < gameArray.count + 1 {
+            if input > 0 && input < gameArray.count {
                 
                 gameArray[input - 1].checkedIn = true
                 gameArray[input - 1].dueDate = nil
@@ -153,11 +174,11 @@ class Library {
                     }
                 }
             } else {
-                print("Invalid Input! Please enter in a number between 1 and \(gameArray.count)")
-                print("")
+                print("Invalid Input! Please enter in a number between 1 and \(gameArray.count) \n")
                 checkGameIn()
             }
         }
+        
     }
 }
 
