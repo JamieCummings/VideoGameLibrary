@@ -15,9 +15,47 @@ class Library {
     // an array of Game objects
     
     func addGame(){
-        //TODO:- add func to add a new game to the gameArray
-        print("Add new title here:")
+        print ("Please enter a password to add a game.")
+        var input: String? = nil
+        repeat {
+            let line = readLine()!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if line != " " {
+                input = line
+            } else {
+                print("Invalid input")
+            }
+        } while input == nil
         
+        if input == "Gamer4Lyfe"{
+            
+            print("Add new title here:")
+            
+            var gameTitle: String? = nil
+            repeat {
+                let line = readLine()!.trimmingCharacters(in: .whitespacesAndNewlines)
+                if line != "" {
+                    gameTitle = line
+                } else {
+                    print("Invalid input")
+                }
+            } while gameTitle == nil
+            
+            gameArray.append(Game(title:gameTitle!))
+            print("\n")
+            
+            for game in gameArray {
+                print(game.title)
+            }
+            print("\n")
+        } else{
+            print("That is not a valid password!")
+        }
+    }
+    
+    func removeGames(){
+        
+        print ("Please enter a password to remove a game.")
         var input: String? = nil
         repeat {
             let line = readLine()!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -28,46 +66,39 @@ class Library {
                 print("Invalid input")
             }
         } while input == nil
+        if input == "Gamer4Lyfe"{
+            
+            print("Please enter a game to remove:")
+            for (i,index) in gameArray.enumerated(){
+                print("\(i+1). \(index.title)")
+            }
         
-        gameArray.append(Game(title: input!))
-        print("\n")
-        
-        for game in gameArray {
-            print(game.title)
-        }
-        print("\n")
-    }
-    
-    func removeGames(){
-        //TODO:- add func to remove games
-        print("Please enter a game to remove:")
-        for (i,index) in gameArray.enumerated(){
-            print("\(i+1). \(index.title)")
-        }
-        if let input = Int(readLine()!){
-            if input > 0 && input < gameArray.count{
-                gameArray.remove(at: input - 1)
+            if let removeTitle = Int(readLine()!){
+                if removeTitle > 0 && removeTitle < gameArray.count{
+                    gameArray.remove(at: removeTitle - 1)
+                } else {
+                    print("please choose a correct number!")
+                }
             } else {
                 print("please choose a correct number!")
             }
-        } else {
-            print("please choose a correct number!")
+            print("")
+            print("Current games in library: \n")
+            for game in gameArray {
+                print(game.title)
+            }
+            print("")
+        } else{
+            print("That is not a valid password!")
         }
-        print("")
-        print("Current games in library: \n")
-        for game in gameArray {
-            print(game.title)
-        }
-        print("")
     }
-    
     func listAvaiableGames(){
         print("Games that are avaible:")
         for game in gameArray {
             if game.checkedIn == true {
                 print(game.title)
-            }
             
+            }
         }
         print("\n")
     }
@@ -96,14 +127,14 @@ class Library {
         
         var checkList = false
         for game in gameArray {
-            if game.checkedIn == false {
+            if game.checkedIn == true {
                 checkList = true
             }
         }
         if !checkList {
-            return print("There are no games available to check in.")
+            return print("There are no games available to check out.")
         }
-       
+        
         for (i, index) in gameArray.enumerated() {
             if index.checkedIn == true {
                 
@@ -118,21 +149,27 @@ class Library {
         if let input = Int(readLine()!) {
             
             if input > 0 && input < gameArray.count {
-                
-                gameArray[input - 1].checkedIn = false
-                let currentCalendar = Calendar.current
-                let dueDate = currentCalendar.date(byAdding: .day, value: 14, to: Date())
-                gameArray[input - 1].dueDate = dueDate
-                if let dueDate = dueDate{
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "MM/dd/yyyy"
-                    print("your game is due back on \(dateFormatter.string(from: dueDate))")
+                if !gameArray[input - 1].checkedIn{
+                    return print("This game is checked out.")
+                } else {
+                    
+                    gameArray[input - 1].checkedIn = false
+                    let currentCalendar = Calendar.current
+                    let dueDate = currentCalendar.date(byAdding: .day, value: 14, to: Date())
+                    gameArray[input - 1].dueDate = dueDate
+                    if let dueDate = dueDate{
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MM/dd/yyyy"
+                        print("your game is due back on \(dateFormatter.string(from: dueDate))")
+                    }
                 }
                 
-                
             } else {
-                print("Invalid Input! Please enter in a number between 1 and \(gameArray.count - 1)")
+                print("Invalid Input! Please enter in a number between 1 and \(gameArray.count)")
             }
+        } else {
+            print("Invalid Input! Please enter in a number between 1 and \(gameArray.count)")
+            checkGameOut()
         }
     }
     func checkGameIn(){
@@ -163,23 +200,30 @@ class Library {
         if let input = Int(readLine()!) {
             
             if input > 0 && input < gameArray.count {
-                
-                gameArray[input - 1].checkedIn = true
-                gameArray[input - 1].dueDate = nil
-                print("These are available for check out:")
-                print("")
-                for game in gameArray{
-                    if game.checkedIn == true {
-                        print(game.title)
+                if gameArray[input - 1].checkedIn {
+                    return print("This game is already found in the library.")
+                } else {
+                    gameArray[input - 1].checkedIn = true
+                    gameArray[input - 1].dueDate = nil
+                    print("These are available for check out:")
+                    print("")
+                    for game in gameArray{
+                        if game.checkedIn == true {
+                            print(game.title)
+                        }
                     }
                 }
             } else {
                 print("Invalid Input! Please enter in a number between 1 and \(gameArray.count) \n")
                 checkGameIn()
             }
+        } else {
+            print("Invalid Input! Please enter in a number between 1 and \(gameArray.count) \n")
+            checkGameIn()
         }
-        
     }
 }
+
+
 
 
