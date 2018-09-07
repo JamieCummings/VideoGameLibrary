@@ -103,22 +103,28 @@ class Library{
             print("That is not a valid password!")
         }
     }
-    func listAvaiableGames(){
+    func listAvaiableGames() -> [Game] {
+        var availableGames: [Game] = []
         print("Games that are avaible:")
         for game in gameArray {
             if game.checkedIn == true {
+                availableGames.append(game)
                 print(game.title)
                 
             }
         }
         print("\n")
+        return availableGames
     }
     
-    func listUnavaiableGames() {
+    func listUnavaiableGames() -> [Game] {
+        
+        var unavailableGames: [Game] = []
         
         print("Following games are unavaiable:")
         for game in gameArray {
             if game.checkedIn == false {
+                unavailableGames.append(game)
                 print(game.title)
                 if let dueDate = game.dueDate{
                     let dateFormatter = DateFormatter()
@@ -129,25 +135,51 @@ class Library{
             
         }
         print("\n")
+        return unavailableGames
     }
     
-    func gamerAge() -> Int {
-        
-        var age: Int? = nil
-        print ("Please enter your age:")
-        repeat {
-            if let input = Int(readLine()!){
-                age = input
-            } else {
-                print("Invalid input")
-            }
-        } while age == nil
-        return age!
+    func getAge() -> Int? {
+        print("How old are you?")
+        if let age = Int(readLine()!) {
+            return age
+        }
+        else{
+            return nil
+        }
     }
     
     
     func checkGameOut(){
+        // New array for games in rating.
+        let availableGames = listAvaiableGames()
+        var gamesInRating = [Game]()
         
+        //////
+        
+        guard let age = getAge() else {
+            print("You didn't put in an age.")
+            return
+        }
+        
+        for game in availableGames {
+            if age >= 18 {
+                gamesInRating.append(game)
+            } else if age >= 13 {
+                if game.gameRating != "M" {
+                    gamesInRating.append(game)
+                }
+            } else {
+                if game.gameRating != "T" && game.gameRating != "M" {
+                    gamesInRating.append(game)
+                }
+            }
+        }
+        
+        for (n, game) in gamesInRating.enumerated() {
+            print("\(n). \(game.title)")
+        }
+        
+        //////
         print("What game would you like to check out?")
         
         var checkList = false
