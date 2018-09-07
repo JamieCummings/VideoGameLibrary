@@ -160,7 +160,7 @@ class Library {
                     if let dueDate = dueDate{
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "MM/dd/yyyy"
-                        print("your game is due back on \(dateFormatter.string(from: dueDate))")
+                        print("\(gameArray[input - 1].title) is due back on \(dateFormatter.string(from: dueDate))")
                     }
                 }
                 
