@@ -12,12 +12,14 @@ import Foundation
 class Game {
     var title: String
     var checkedIn = true
+    var gameRating: String
     // set this to true by default, since whenever we create a new Game, we're going to assume it's checked in
     var dueDate: Date?
     // this is opt bc if the game isn't checked out is shouldn't have a due date
     
-    init(title:String) {
+    init(title:String, gameRating: String) {
         self.title = title
+        self.gameRating = gameRating 
         //since checkedin has a default value and duedate is an optional, the only balue that we have to initialize is the title
         
     }

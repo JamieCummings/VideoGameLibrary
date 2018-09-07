@@ -10,8 +10,8 @@ import Foundation
 
 //  this class will handle storing our array of Games. it will also handle all the interactions with that array.
 
-class Library {
-    fileprivate var gameArray: [Game] = [Game(title: "Just Dance"), Game(title: "Zelda"), Game(title: "Duck Hunt")]
+class Library{
+    fileprivate var gameArray: [Game] = [Game(title: "Just Dance", gameRating: "M"), Game(title: "Zelda", gameRating: "T"), Game(title: "Duck Hunt", gameRating: "E")]
     // an array of Game objects
     
     func addGame(){
@@ -41,11 +41,22 @@ class Library {
                 }
             } while gameTitle == nil
             
-            gameArray.append(Game(title:gameTitle!))
+            var gameRating: String? = nil
+            print("Please enter the game's entertainment rating:")
+            repeat {
+                let line = readLine()!.trimmingCharacters(in: .whitespacesAndNewlines)
+                if line == "E" || line == "T" || line == "M" {
+                    gameRating = line
+                } else {
+                    print("Invalid input")
+                }
+            } while gameRating == nil
+            
+            gameArray.append(Game(title:gameTitle!, gameRating: gameRating!))
             print("\n")
             
             for game in gameArray {
-                print(game.title)
+                print("\(game.title) : \(game.gameRating)")
             }
             print("\n")
         } else{
@@ -72,7 +83,7 @@ class Library {
             for (i,index) in gameArray.enumerated(){
                 print("\(i+1). \(index.title)")
             }
-        
+            
             if let removeTitle = Int(readLine()!){
                 if removeTitle > 0 && removeTitle < gameArray.count{
                     gameArray.remove(at: removeTitle - 1)
@@ -97,14 +108,14 @@ class Library {
         for game in gameArray {
             if game.checkedIn == true {
                 print(game.title)
-            
+                
             }
         }
         print("\n")
     }
     
     func listUnavaiableGames() {
-        //TODO:- add func to list games that are checked out from the gameArray
+        
         print("Following games are unavaiable:")
         for game in gameArray {
             if game.checkedIn == false {
@@ -120,9 +131,23 @@ class Library {
         print("\n")
     }
     
+    func gamerAge() -> Int {
+        
+        var age: Int? = nil
+        print ("Please enter your age:")
+        repeat {
+            if let input = Int(readLine()!){
+                age = input
+            } else {
+                print("Invalid input")
+            }
+        } while age == nil
+        return age!
+    }
+    
     
     func checkGameOut(){
-        //TODO:- add func to check game out
+        
         print("What game would you like to check out?")
         
         var checkList = false
@@ -171,9 +196,10 @@ class Library {
             print("Invalid Input! Please enter in a number between 1 and \(gameArray.count)")
             checkGameOut()
         }
+        
     }
     func checkGameIn(){
-        //TODO:- add func to check game in
+        
         print("What game would you like to check in?")
         
         var checkList = false
